@@ -1,0 +1,19 @@
+{
+  "notfound": {
+    "error": "PAGE NOT FOUND",
+    "message": "Back To Home"
+  },
+  "header": {
+    "button": {
+      "login": "Login"
+    }
+  },
+  "home": {
+    "intro": {
+      "message": "Effective memorization with Flashcard.",
+      "button": {
+        "try_now": "Try now"
+      }
+    }
+  }
+}

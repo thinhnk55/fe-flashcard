@@ -1,0 +1,19 @@
+{
+  "notfound": {
+    "error": "Không tìm thấy trang",
+    "message": "Quay về trang chủ"
+  },
+  "header": {
+    "button": {
+      "login": "Đăng nhập"
+    }
+  },
+  "home": {
+    "intro": {
+      "message": "Ghi nhớ hiệu quả với Flashcard.",
+      "button": {
+        "try_now": "Thử ngay"
+      }
+    }
+  }
+}
