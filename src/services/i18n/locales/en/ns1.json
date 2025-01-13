@@ -15,5 +15,62 @@
         "try_now": "Try now"
       }
     }
+  },
+  "login": {
+    "username": {
+      "label": "Email",
+      "placeholder": "Input your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Input your password"
+    },
+    "submit": {
+      "label": "Login"
+    },
+    "redirect": {
+      "message": "Don't have an account?",
+      "action": "Register now"
+    },
+    "error": {
+      "email_invalid": "The email address is invalid.",
+      "password_invalid": "The password must be between 6 and 50 characters in length.",
+      "email_not_found": "The email address does not exist.",
+      "password_incorrect": "The password is incorrect.",
+      "system_error": "An error occurred. Please try again or contact the administrator for support."
+    }
+  },
+  "register": {
+    "username": {
+      "label": "Email",
+      "placeholder": "Input your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Input your password"
+    },
+    "confirm_password": {
+      "label": "Confirm Password",
+      "placeholder": "Input password again"
+    },
+    "submit": {
+      "label": "Register"
+    },
+    "redirect": {
+      "message": "Already have an account?",
+      "action": "Login now"
+    },
+    "error": {
+      "email_invalid": "The email address is invalid.",
+      "password_invalid": "The password must be between 6 and 50 characters in length.",
+      "password_not_matched": "The password is not matched.",
+      "email_existing": "The email address is registered.",
+      "system_error": "An error occurred. Please try again or contact the administrator for support."
+    }
+  },
+  "profile": {
+    "button": {
+      "logout": "Logout"
+    }
   }
 }

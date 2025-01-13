@@ -1,4 +1,4 @@
-import LoadingSpinner from "../../common/LoadingSpinner";
+import { LoadingSpinner } from "../../common/LoadingSpinner";
 import { lazyLoad } from "../../utils/lazyload";
 
 export const Home = lazyLoad(
