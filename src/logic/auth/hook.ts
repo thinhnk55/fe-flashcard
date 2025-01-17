@@ -1,22 +1,39 @@
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
-import { auth_storage_key, authAtom } from "./recoil";
+import {
+  auth_storage_key,
+  authAtom,
+  forgot_password_storage_key,
+  forgotPasswordAtom,
+} from "./recoil";
 
 export const useAuthState = () => {
-  const [auth, setAuth] = useRecoilState(authAtom);
-
-  // Load initial state from local storage
+  const [data, setData] = useRecoilState(authAtom);
   useEffect(() => {
-    const storeAuthData = localStorage.getItem(auth_storage_key);
-    if (storeAuthData) {
-      const storedAuth = JSON.parse(storeAuthData);
-      setAuth(storedAuth);
+    const storedData = localStorage.getItem(auth_storage_key);
+    if (storedData) {
+      const data = JSON.parse(storedData);
+      setData(data);
     }
-  }, [setAuth]);
-  // Sync state to local storage whenever auth changes
+  }, [setData]);
   useEffect(() => {
-    localStorage.setItem(auth_storage_key, JSON.stringify(auth));
-  }, [auth]);
+    localStorage.setItem(auth_storage_key, JSON.stringify(data));
+  }, [data]);
 
-  return [auth, setAuth] as const;
+  return [data, setData] as const;
+};
+
+export const useForgotPasswordState = () => {
+  const [data, setData] = useRecoilState(forgotPasswordAtom);
+  useEffect(() => {
+    const storedData = localStorage.getItem(forgot_password_storage_key);
+    if (storedData) {
+      const data = JSON.parse(storedData);
+      setData(data);
+    }
+  }, [setData]);
+  useEffect(() => {
+    localStorage.setItem(forgot_password_storage_key, JSON.stringify(data));
+  }, [data]);
+  return [data, setData] as const;
 };

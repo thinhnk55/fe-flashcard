@@ -12,3 +12,9 @@ export const RegisterPage = lazyLoad(
   (module) => module.default,
   { fallback: <LoadingSpinner /> }
 );
+
+export const ForgotPasswordPage = lazyLoad(
+  () => import("./forgotpassword"),
+  (module) => module.default,
+  { fallback: <LoadingSpinner /> }
+);

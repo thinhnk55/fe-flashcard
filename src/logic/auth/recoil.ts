@@ -12,6 +12,7 @@ export interface Auth {
   token: string;
   token_expired: number;
   created_time: number;
+  access_token: string;
 }
 
 export const convertLoginDataToAuth = (auth: Auth, loginData: LoginData) => {
@@ -22,6 +23,7 @@ export const convertLoginDataToAuth = (auth: Auth, loginData: LoginData) => {
     token: loginData.token,
     token_expired: loginData.token_expired,
     created_time: loginData.created_time,
+    access_token: loginData.access_token,
   };
 };
 
@@ -48,6 +50,7 @@ const initialAuthState: Auth = {
   token_expired: 0,
   token: "",
   created_time: 0,
+  access_token: "",
 };
 
 export const auth_storage_key = "auth_data";
@@ -71,4 +74,41 @@ export const loadAuthFromLocalStorage = () => {
 export const authAtom = atom<Auth>({
   key: "authAtom", // Unique key for the atom
   default: loadAuthFromLocalStorage(), // Default state
+});
+
+export interface ForgotPasswordData {
+  username: string;
+  otp: string;
+  password: string;
+  waiting: number;
+}
+
+const initialForgotPasswordState: ForgotPasswordData = {
+  username: "",
+  otp: "",
+  password: "",
+  waiting: 0,
+};
+
+export const forgot_password_storage_key = "forgot_password";
+export const forgot_password_waiting = 60;
+
+export const loadForgotPasswordFromLocalStorage = () => {
+  try {
+    const storedData = localStorage.getItem(forgot_password_storage_key);
+    if (storedData) {
+      const data = JSON.parse(storedData) as ForgotPasswordData;
+      return data;
+    } else {
+      return initialForgotPasswordState;
+    }
+  } catch (error) {
+    console.error("Failed to parse auth data from localStorage:", error);
+    return initialForgotPasswordState;
+  }
+};
+
+export const forgotPasswordAtom = atom<ForgotPasswordData>({
+  key: "forgotPasswordAtom",
+  default: loadForgotPasswordFromLocalStorage(),
 });

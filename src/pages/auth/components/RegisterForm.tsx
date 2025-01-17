@@ -54,13 +54,13 @@ export const RegisterForm: React.FC = () => {
       } else if (response.e == 10) {
         setError("register.error.email_existing");
       } else {
-        setError("register.error.system_error");
+        setError("common.error.system_error");
       }
     } catch (err) {
       setError(
         err instanceof Error
-          ? "register.error.system_error"
-          : "register.error.system_error"
+          ? "common.error.system_error"
+          : "common.error.system_error"
       );
     } finally {
       setIsLoading(false);

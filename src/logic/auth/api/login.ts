@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL: string = "https://auth-446608.as.r.appspot.com/";
+const URL: string = "https://auth-dot-app-demo-447811.as.r.appspot.com/";
 
 export interface LoginRequest {
   username: string;
@@ -18,6 +18,7 @@ export interface LoginData {
   token: string;
   token_expired: number;
   created_time: number;
+  access_token: string;
 }
 
 export const handleLogin = async (
@@ -34,7 +35,7 @@ export const handleLogin = async (
     const response = await api.post<LoginResponse>("auth/login", data);
     return response.data;
   } catch (error) {
-    console.error("Login failed:", error);
+    console.error("handleLogin failed:", error);
     return { e: 1 };
   }
 };

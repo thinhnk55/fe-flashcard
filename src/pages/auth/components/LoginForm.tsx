@@ -51,13 +51,13 @@ export const LoginForm: React.FC = () => {
       } else if (response.e == 11) {
         setError("login.error.password_incorrect");
       } else {
-        setError("login.error.system_error");
+        setError("common.error.system_error");
       }
     } catch (err) {
       setError(
         err instanceof Error
-          ? "login.error.system_error"
-          : "login.error.system_error"
+          ? "common.error.system_error"
+          : "common.error.system_error"
       );
     } finally {
       setIsLoading(false);
@@ -71,22 +71,39 @@ export const LoginForm: React.FC = () => {
     >
       <Logo />
       <EmailInput
+        label={t("login.username.label")}
+        placeholder={t("login.username.placeholder")}
         value={auth.username}
         onChange={(value) => setAuth((prev) => ({ ...prev, username: value }))}
         required
       />
-      <PasswordInput
-        label={t("login.password.label")}
-        placeholder={t("login.password.placeholder")}
-        id="password"
-        value={auth.password}
-        onChange={(value) => setAuth((prev) => ({ ...prev, password: value }))}
-        required
-      />
+      <div className="w-full flex flex-col gap-1">
+        <PasswordInput
+          label={t("login.password.label")}
+          placeholder={t("login.password.placeholder")}
+          id="password"
+          value={auth.password}
+          onChange={(value) =>
+            setAuth((prev) => ({ ...prev, password: value }))
+          }
+          required
+        />
+        <LoginForgotPassword />
+      </div>
       <LoginError message={error} />
       <LoginButton isLoading={isLoading} />
       <LoginRedirect />
     </form>
+  );
+};
+const LoginForgotPassword: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <Link to="/forgot">
+      <b className="text-sm text-text-500 underline">
+        {t("login.forgot_password.label")}
+      </b>
+    </Link>
   );
 };
 

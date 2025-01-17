@@ -1,4 +1,9 @@
 {
+  "common": {
+    "error": {
+      "system_error": "An error occurred. Please try again or contact the administrator for support."
+    }
+  },
   "notfound": {
     "error": "PAGE NOT FOUND",
     "message": "Back To Home"
@@ -25,6 +30,9 @@
       "label": "Password",
       "placeholder": "Input your password"
     },
+    "forgot_password": {
+      "label": "Forgot password?"
+    },
     "submit": {
       "label": "Login"
     },
@@ -36,8 +44,7 @@
       "email_invalid": "The email address is invalid.",
       "password_invalid": "The password must be between 6 and 50 characters in length.",
       "email_not_found": "The email address does not exist.",
-      "password_incorrect": "The password is incorrect.",
-      "system_error": "An error occurred. Please try again or contact the administrator for support."
+      "password_incorrect": "The password is incorrect."
     }
   },
   "register": {
@@ -64,9 +71,22 @@
       "email_invalid": "The email address is invalid.",
       "password_invalid": "The password must be between 6 and 50 characters in length.",
       "password_not_matched": "The password is not matched.",
-      "email_existing": "The email address is registered.",
-      "system_error": "An error occurred. Please try again or contact the administrator for support."
+      "email_existing": "The email address is registered."
     }
+  },
+  "forgot_password": {
+    "username": {
+      "label": "Email",
+      "placeholder": "Input your email"
+    },
+    "submit": {
+      "label": "Forgot Password"
+    },
+    "error": {
+      "email_invalid": "The email address is invalid.",
+      "email_not_found": "The email address does not exist."
+    },
+    "login": { "label": "Back to Login" }
   },
   "profile": {
     "button": {

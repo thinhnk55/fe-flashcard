@@ -18,6 +18,7 @@ export interface RegisterData {
   token: string;
   token_expired: number;
   created_time: number;
+  access_token: string;
 }
 
 export const handleRegister = async (
