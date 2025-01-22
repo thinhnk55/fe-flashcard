@@ -1,6 +1,6 @@
 import { Logo } from "../../../common/Logo";
 import { EmailInput } from "./EmailInput";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { validateEmail } from "../../../utils/util";
 import { useTranslation } from "react-i18next";
 import { CommonButton } from "../../../common/CommonButton";
@@ -28,6 +28,7 @@ export const ForgotPasswordForm: React.FC = () => {
       setError("reset_password.error.email_invalid");
       return;
     }
+
     setIsLoading(true);
     try {
       const request: OtpEmailRequest = {
