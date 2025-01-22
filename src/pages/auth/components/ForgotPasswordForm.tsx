@@ -22,12 +22,6 @@ export const ForgotPasswordForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (resetPasswordData.checked) {
-      setResetPasswordData({ ...resetPasswordData, checked: false });
-    }
-  }, [resetPasswordData, setResetPasswordData]);
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateEmail(resetPasswordData.username)) {
@@ -42,13 +36,11 @@ export const ForgotPasswordForm: React.FC = () => {
       const response: OtpEmailResponse = await sendOtpToEmail(request);
       if (response.e === 0) {
         setError(null);
-        const updatedData = {
+        setResetPasswordData({
           ...resetPasswordData,
           waiting: reset_password_waiting,
           checked: true,
-        };
-        console.log(JSON.stringify(updatedData));
-        setResetPasswordData(updatedData);
+        });
         navigate("/reset");
       } else if (response.e === 10) {
         setError("reset_password.error.email_not_found");

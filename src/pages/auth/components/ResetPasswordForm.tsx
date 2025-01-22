@@ -126,7 +126,6 @@ export const ResetPasswordForm: React.FC = () => {
         };
         console.log(JSON.stringify(updatedData));
         setResetPasswordData(updatedData);
-        navigate("/reset");
       } else if (response.e === 10) {
         setError("reset_password.error.email_not_found");
       } else {
@@ -239,7 +238,7 @@ const ResetPasswordError: React.FC<{ message: string | null }> = ({
 const ResetPasswordBack: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <Link to="/reset">
+    <Link to="/forgot">
       <b className="text-text-500 underline">{t("reset.back.label")}</b>
     </Link>
   );

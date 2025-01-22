@@ -8,10 +8,10 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   e: number;
-  d?: RegisterData;
+  d?: RegisterResponseData;
 }
 
-export interface RegisterData {
+export interface RegisterResponseData {
   username: string;
   role: number;
   status: number;

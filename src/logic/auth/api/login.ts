@@ -8,10 +8,10 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   e: number;
-  d?: LoginData;
+  d?: LoginResponseData;
 }
 
-export interface LoginData {
+export interface LoginResponseData {
   username: string;
   role: number;
   status: number;

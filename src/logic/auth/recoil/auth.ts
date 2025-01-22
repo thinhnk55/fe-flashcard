@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
-import { LoginData } from "../api/login";
-import { RegisterData } from "../api/register";
-import { ResetPasswordData } from "../api/resetpassword";
+import { LoginResponseData } from "../api/login";
+import { RegisterResponseData } from "../api/register";
+import { ResetPasswordResponseData } from "../api/resetpassword";
 
 // Define the Auth interface for user authentication details
 export interface Auth {
@@ -16,7 +16,7 @@ export interface Auth {
   access_token: string;
 }
 
-export const convertLoginDataToAuth = (auth: Auth, data: LoginData) => {
+export const convertLoginDataToAuth = (auth: Auth, data: LoginResponseData) => {
   return {
     ...auth,
     username: data.username,
@@ -30,7 +30,10 @@ export const convertLoginDataToAuth = (auth: Auth, data: LoginData) => {
   };
 };
 
-export const convertRegisterDataToAuth = (auth: Auth, data: RegisterData) => {
+export const convertRegisterDataToAuth = (
+  auth: Auth,
+  data: RegisterResponseData
+) => {
   return {
     ...auth,
     username: data.username,
@@ -46,7 +49,7 @@ export const convertRegisterDataToAuth = (auth: Auth, data: RegisterData) => {
 
 export const convertResetPassworDataToAuth = (
   auth: Auth,
-  data: ResetPasswordData
+  data: ResetPasswordResponseData
 ) => {
   return {
     ...auth,
