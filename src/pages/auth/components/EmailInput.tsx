@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface EmailInputProps {
   onChange?: (value: string) => void;
@@ -7,6 +6,7 @@ interface EmailInputProps {
   value?: string;
   label: string;
   placeholder: string;
+  id: string;
 }
 
 export const EmailInput: React.FC<EmailInputProps> = ({
@@ -15,16 +15,16 @@ export const EmailInput: React.FC<EmailInputProps> = ({
   value,
   label,
   placeholder,
+  id,
 }) => {
-  const { t } = useTranslation();
   return (
     <div className="w-full">
-      <label htmlFor="email" className="block mb-2 font-medium text-text-950">
+      <label htmlFor={id} className="block mb-2 font-medium text-text-950">
         {label}
       </label>
       <input
         type="email"
-        id="email"
+        id={id}
         className="w-full p-2 bg-gray-50 border border-text-900 text-text-950 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 rounded-md"
         placeholder={placeholder}
         value={value}

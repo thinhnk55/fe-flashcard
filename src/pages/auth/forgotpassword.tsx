@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-import { useAuthState } from "../../logic/auth/hook";
+import { useAuthState } from "../../logic/auth/recoil/auth";
 import { ForgotPasswordForm } from "./components/ForgotPasswordForm";
 
 const ForgotPasswordPage: React.FC = () => {

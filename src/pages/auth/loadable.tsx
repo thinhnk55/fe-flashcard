@@ -18,3 +18,9 @@ export const ForgotPasswordPage = lazyLoad(
   (module) => module.default,
   { fallback: <LoadingSpinner /> }
 );
+
+export const ResetPasswordPage = lazyLoad(
+  () => import("./resetpassword"),
+  (module) => module.default,
+  { fallback: <LoadingSpinner /> }
+);

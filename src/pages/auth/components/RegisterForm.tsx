@@ -2,17 +2,19 @@ import React, { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CommonButton } from "../../../common/CommonButton";
 import { Logo } from "../../../common/Logo";
-import { EmailInput } from "./EmailInput";
 import { PasswordInput } from "./PasswordInput";
 import { useTranslation } from "react-i18next";
 import { validateEmail, validateLength } from "../../../utils/util";
-import { useAuthState } from "../../../logic/auth/hook";
 import {
   handleRegister,
   RegisterRequest,
   RegisterResponse,
 } from "../../../logic/auth/api/register";
-import { convertRegisterDataToAuth } from "../../../logic/auth/recoil";
+import {
+  convertRegisterDataToAuth,
+  useAuthState,
+} from "../../../logic/auth/recoil/auth";
+import { EmailInput } from "./EmailInput";
 
 export const RegisterForm: React.FC = () => {
   const { t } = useTranslation();
@@ -74,6 +76,9 @@ export const RegisterForm: React.FC = () => {
     >
       <Logo />
       <EmailInput
+        label={t("register.username.label")}
+        placeholder={t("register.username.placeholder")}
+        id="register_email"
         value={auth.username}
         onChange={(value) => setAuth((prev) => ({ ...prev, username: value }))}
         required
@@ -81,7 +86,7 @@ export const RegisterForm: React.FC = () => {
       <PasswordInput
         label={t("register.password.label")}
         placeholder={t("register.password.placeholder")}
-        id="password"
+        id="register_password"
         value={auth.password}
         onChange={(value) => setAuth((prev) => ({ ...prev, password: value }))}
         required
@@ -89,7 +94,7 @@ export const RegisterForm: React.FC = () => {
       <PasswordInput
         label={t("register.confirm_password.label")}
         placeholder={t("register.confirm_password.placeholder")}
-        id="confirm_password"
+        id="register_confirm_password"
         value={confirmedPassword}
         onChange={(value) => setConfirmedPassword(value)}
         required

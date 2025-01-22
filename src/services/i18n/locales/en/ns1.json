@@ -44,6 +44,7 @@
       "email_invalid": "The email address is invalid.",
       "password_invalid": "The password must be between 6 and 50 characters in length.",
       "email_not_found": "The email address does not exist.",
+      "account_locked": "Your account is locked.",
       "password_incorrect": "The password is incorrect."
     }
   },
@@ -91,6 +92,36 @@
   "profile": {
     "button": {
       "logout": "Logout"
+    }
+  },
+  "reset": {
+    "email": {
+      "instruction": "We sent a code to: ",
+      "waiting_1": "You can resend the code in",
+      "waiting_2": "seconds.",
+      "action": "Click to resend"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Input your password"
+    },
+    "confirm_password": {
+      "label": "Confirm Password",
+      "placeholder": "Input password again"
+    },
+    "submit": {
+      "label": "Reset Password"
+    },
+    "back": {
+      "label": "Back"
+    },
+    "error": {
+      "password_invalid": "The password must be between 6 and 50 characters in length.",
+      "password_not_matched": "The password is not matched.",
+      "otp_not_found": "The OTP is not found.",
+      "otp_invalid": "The OTP is invalid.",
+      "otp_exprired": "The OTP is expired.",
+      "otp_used": "The OTP is used."
     }
   }
 }

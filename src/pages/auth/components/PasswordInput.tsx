@@ -46,9 +46,9 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
           aria-label={isVisible ? "Hide password" : "Show password"}
         >
           {isVisible ? (
-            <Icon icon="weui:eyes-on-filled" width={24} height={24} />
-          ) : (
             <Icon icon="weui:eyes-off-filled" width={24} height={24} />
+          ) : (
+            <Icon icon="weui:eyes-on-filled" width={24} height={24} />
           )}
         </button>
       </div>

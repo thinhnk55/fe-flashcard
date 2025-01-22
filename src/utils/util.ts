@@ -10,3 +10,12 @@ export const validateLength = (
 ): boolean => {
   return value.length >= from && value.length <= to;
 };
+
+export const processTemplate = (
+  template: string,
+  values: { [key: string]: string | number }
+): string => {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    return values[key] !== undefined ? String(values[key]) : `{{${key}}}`;
+  });
+};

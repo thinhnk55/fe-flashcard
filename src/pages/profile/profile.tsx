@@ -1,35 +1,26 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-import { useAuthState } from "../../logic/auth/hook";
 import { CommonButton } from "../../common/CommonButton";
 import LetterAvatar from "../../common/LetterAvatar";
 import { Header } from "../../common/Header";
 import { useTranslation } from "react-i18next";
+import { useAuthState } from "../../logic/auth/recoil/auth";
 
 const ProfilePage: React.FC = () => {
   const { t } = useTranslation();
-  const [auth, setAuth] = useAuthState(); // Access auth state
-  const navigate = useNavigate(); // Hook for navigating programmatically
+  const [auth, setAuth] = useAuthState();
+  const navigate = useNavigate();
 
   // Redirect to login page if the user is not logged in
   useEffect(() => {
     if (!auth.token) {
-      navigate("/login"); // Redirect to login page
+      navigate("/login");
     }
   }, [auth.token, navigate]);
 
   // Logout handler
   const handleLogout = () => {
-    setAuth({
-      username: "",
-      password: "",
-      role: 0,
-      status: 0,
-      token_expired: 0,
-      token: "",
-      created_time: 0,
-    }); // Reset auth state
-    localStorage.removeItem("auth_data");
+    setAuth({ ...auth, password: "", token: "", access_token: "" });
     navigate("/login");
   };
 

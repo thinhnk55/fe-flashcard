@@ -6,13 +6,15 @@ import { EmailInput } from "./EmailInput";
 import { PasswordInput } from "./PasswordInput";
 import { useTranslation } from "react-i18next";
 import { validateEmail, validateLength } from "../../../utils/util";
-import { useAuthState } from "../../../logic/auth/hook";
 import {
   handleLogin,
   LoginRequest,
   LoginResponse,
 } from "../../../logic/auth/api/login";
-import { convertLoginDataToAuth } from "../../../logic/auth/recoil";
+import {
+  convertLoginDataToAuth,
+  useAuthState,
+} from "../../../logic/auth/recoil/auth";
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
@@ -49,6 +51,8 @@ export const LoginForm: React.FC = () => {
       } else if (response.e == 10) {
         setError("login.error.email_not_found");
       } else if (response.e == 11) {
+        setError("login.error.account_locked");
+      } else if (response.e == 12) {
         setError("login.error.password_incorrect");
       } else {
         setError("common.error.system_error");
@@ -73,6 +77,7 @@ export const LoginForm: React.FC = () => {
       <EmailInput
         label={t("login.username.label")}
         placeholder={t("login.username.placeholder")}
+        id="login_email"
         value={auth.username}
         onChange={(value) => setAuth((prev) => ({ ...prev, username: value }))}
         required
@@ -81,7 +86,7 @@ export const LoginForm: React.FC = () => {
         <PasswordInput
           label={t("login.password.label")}
           placeholder={t("login.password.placeholder")}
-          id="password"
+          id="login_password"
           value={auth.password}
           onChange={(value) =>
             setAuth((prev) => ({ ...prev, password: value }))

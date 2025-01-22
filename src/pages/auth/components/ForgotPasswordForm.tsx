@@ -1,41 +1,51 @@
 import { Logo } from "../../../common/Logo";
 import { EmailInput } from "./EmailInput";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { validateEmail } from "../../../utils/util";
 import { useTranslation } from "react-i18next";
 import { CommonButton } from "../../../common/CommonButton";
 import { Link, useNavigate } from "react-router-dom";
-import { useForgotPasswordState } from "../../../logic/auth/hook";
 import {
   OtpEmailRequest,
   OtpEmailResponse,
   sendOtpToEmail,
-} from "../../../logic/auth/api/forgotpassword";
+} from "../../../logic/auth/api/otpEmail";
+import {
+  reset_password_waiting,
+  useResetPasswordState,
+} from "../../../logic/auth/recoil/resetpassword";
 
 export const ForgotPasswordForm: React.FC = () => {
   const { t } = useTranslation();
-  const [forgotPasswordData, setForgotPasswordData] = useForgotPasswordState();
+  const [resetPasswordData, setResetPasswordData] = useResetPasswordState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateEmail(forgotPasswordData.username)) {
-      setError("forgot_password.error.email_invalid");
+    if (!validateEmail(resetPasswordData.username)) {
+      setError("reset_password.error.email_invalid");
       return;
     }
     setIsLoading(true);
     try {
       const request: OtpEmailRequest = {
-        username: forgotPasswordData.username,
+        username: resetPasswordData.username,
       };
       const response: OtpEmailResponse = await sendOtpToEmail(request);
       if (response.e === 0) {
         setError(null);
+        const updatedData = {
+          ...resetPasswordData,
+          waiting: reset_password_waiting,
+          checked: true,
+        };
+        console.log(JSON.stringify(updatedData));
+        setResetPasswordData(updatedData);
         navigate("/reset");
       } else if (response.e === 10) {
-        setError("forgot_password.error.email_not_found");
+        setError("reset_password.error.email_not_found");
       } else {
         setError("common.error.system_error");
       }
@@ -58,20 +68,21 @@ export const ForgotPasswordForm: React.FC = () => {
       <EmailInput
         label={t("forgot_password.username.label")}
         placeholder={t("forgot_password.username.placeholder")}
-        value={forgotPasswordData.username}
+        id="forgot_password_email"
+        value={resetPasswordData.username}
         onChange={(value) =>
-          setForgotPasswordData((prev) => ({ ...prev, username: value }))
+          setResetPasswordData((prev) => ({ ...prev, username: value }))
         }
         required
       />
-      <ForgotPasswordError message={error} />
-      <ForgotPasswordButton isLoading={isLoading} />
-      <ForgotPasswordBackToLogin />
+      <ResetPasswordError message={error} />
+      <ResetPasswordButton isLoading={isLoading} />
+      <ResetPasswordBackToLogin />
     </form>
   );
 };
 
-const ForgotPasswordButton: React.FC<{ isLoading: boolean }> = ({
+const ResetPasswordButton: React.FC<{ isLoading: boolean }> = ({
   isLoading,
 }) => {
   const { t } = useTranslation();
@@ -82,7 +93,7 @@ const ForgotPasswordButton: React.FC<{ isLoading: boolean }> = ({
   );
 };
 
-const ForgotPasswordError: React.FC<{ message: string | null }> = ({
+const ResetPasswordError: React.FC<{ message: string | null }> = ({
   message,
 }) => {
   const { t } = useTranslation();
@@ -90,7 +101,7 @@ const ForgotPasswordError: React.FC<{ message: string | null }> = ({
   return <span className="text-red-500">{t(message)}</span>;
 };
 
-const ForgotPasswordBackToLogin: React.FC = () => {
+const ResetPasswordBackToLogin: React.FC = () => {
   const { t } = useTranslation();
   return (
     <Link to="/login">

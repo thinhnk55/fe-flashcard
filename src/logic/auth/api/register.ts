@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL: string = "https://auth-446608.as.r.appspot.com/";
+const URL: string = "https://auth-dot-app-demo-447811.as.r.appspot.com/";
 export interface RegisterRequest {
   username: string;
   password: string;
@@ -35,7 +35,7 @@ export const handleRegister = async (
     const response = await api.post<RegisterResponse>("auth/register", data);
     return response.data;
   } catch (error) {
-    console.error("Login failed:", error);
+    console.error("handleRegister failed:", error);
     return { e: 1 };
   }
 };

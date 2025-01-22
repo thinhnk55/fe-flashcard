@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../../pages/home/loadable";
 import { PageNotFound } from "../../pages/notfound/loadable";
-import { LoginPage } from "../../pages/auth/loadable";
-import RegisterPage from "../../pages/auth/register";
-import ProfilePage from "../../pages/profile/profile";
-import ForgotPasswordPage from "../../pages/auth/forgotpassword";
+import { ProfilePage } from "../../pages/profile/loadable";
+import {
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+} from "../../pages/auth/loadable";
 
 export const routerConfig = createBrowserRouter([
   {
@@ -22,6 +25,10 @@ export const routerConfig = createBrowserRouter([
   {
     path: "/forgot",
     element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/reset",
+    element: <ResetPasswordPage />,
   },
   {
     path: "/profile",

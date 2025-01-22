@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import { useTranslation } from "react-i18next";
 import LanguageSwitch from "./LanguageSwitch";
-import { useAuthState } from "../logic/auth/hook";
 import LetterAvatar from "./LetterAvatar";
+import { useAuthState } from "../logic/auth/recoil/auth";
 
 export const Header: React.FC = () => {
   const [auth] = useAuthState();
