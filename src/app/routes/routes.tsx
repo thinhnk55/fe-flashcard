@@ -8,6 +8,7 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
 } from "../../pages/auth/loadable";
+import LoadingPage from "../../pages/notfound/loading";
 
 export const routerConfig = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const routerConfig = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "loading",
+    element: <LoadingPage />,
   },
   {
     path: "*",

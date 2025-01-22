@@ -1,8 +1,8 @@
-import { LoadingSpinner } from "../../common/LoadingSpinner";
 import { lazyLoad } from "../../utils/lazyload";
+import LoadingPage from "../notfound/loading";
 
 export const Home = lazyLoad(
   () => import("./home"),
   (module) => module.default,
-  { fallback: <LoadingSpinner /> }
+  { fallback: <LoadingPage /> }
 );
