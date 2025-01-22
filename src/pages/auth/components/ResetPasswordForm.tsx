@@ -161,7 +161,7 @@ export const ResetPasswordForm: React.FC = () => {
         onChange={(value) =>
           setResetPasswordData((prev) => ({ ...prev, password: value }))
         }
-        required
+        required={true}
       />
       <PasswordInput
         label={t("reset.confirm_password.label")}
@@ -169,7 +169,7 @@ export const ResetPasswordForm: React.FC = () => {
         id="resetconfirm_password"
         value={confirmedPassword}
         onChange={(value) => setConfirmedPassword(value)}
-        required
+        required={true}
       />
       <ResetPasswordError message={error} />
       <ResetPasswordButton isLoading={isLoading} />

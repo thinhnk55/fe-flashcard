@@ -80,7 +80,7 @@ export const LoginForm: React.FC = () => {
         id="login_email"
         value={auth.username}
         onChange={(value) => setAuth((prev) => ({ ...prev, username: value }))}
-        required
+        required={true}
       />
       <div className="w-full flex flex-col gap-1">
         <PasswordInput
@@ -91,7 +91,7 @@ export const LoginForm: React.FC = () => {
           onChange={(value) =>
             setAuth((prev) => ({ ...prev, password: value }))
           }
-          required
+          required={true}
         />
         <LoginForgotPassword />
       </div>

@@ -81,7 +81,7 @@ export const RegisterForm: React.FC = () => {
         id="register_email"
         value={auth.username}
         onChange={(value) => setAuth((prev) => ({ ...prev, username: value }))}
-        required
+        required={true}
       />
       <PasswordInput
         label={t("register.password.label")}
@@ -89,7 +89,7 @@ export const RegisterForm: React.FC = () => {
         id="register_password"
         value={auth.password}
         onChange={(value) => setAuth((prev) => ({ ...prev, password: value }))}
-        required
+        required={true}
       />
       <PasswordInput
         label={t("register.confirm_password.label")}
@@ -97,7 +97,7 @@ export const RegisterForm: React.FC = () => {
         id="register_confirm_password"
         value={confirmedPassword}
         onChange={(value) => setConfirmedPassword(value)}
-        required
+        required={true}
       />
       <RegisterError message={error} />
       <RegisterButton isLoading={isLoading} />

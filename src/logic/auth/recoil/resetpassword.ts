@@ -20,9 +20,10 @@ export const initialresetPasswordState: ResetPasswordData = {
 export const reset_password_storage_key = "reset_password";
 export const reset_password_waiting = 60;
 
-export const loadresetPasswordFromLocalStorage = () => {
+export const loadResetPasswordFromLocalStorage = () => {
   try {
     const storedData = localStorage.getItem(reset_password_storage_key);
+    console.log("loadResetPasswordFromLocalStorage", storedData);
     if (storedData) {
       const data = JSON.parse(storedData) as ResetPasswordData;
       return data;
@@ -37,7 +38,7 @@ export const loadresetPasswordFromLocalStorage = () => {
 
 export const resetPasswordAtom = atom<ResetPasswordData>({
   key: "resetPasswordAtom",
-  default: loadresetPasswordFromLocalStorage(),
+  default: loadResetPasswordFromLocalStorage(),
 });
 
 export const useResetPasswordState = () => {

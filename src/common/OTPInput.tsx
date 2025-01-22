@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface OTPInputProps {
   value: string; // The OTP string from the parent component
@@ -7,7 +7,11 @@ interface OTPInputProps {
 
 const OTPInput: React.FC<OTPInputProps> = ({ value, onChange }) => {
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
-
+  useEffect(() => {
+    if (value && value.length === 6) {
+      setOtp(value.split(""));
+    }
+  }, [value]);
   const handleChange = (index: number, newValue: string) => {
     const sanitizedValue = newValue.replace(/[^0-9]/g, ""); // Allow only numbers
     if (sanitizedValue.length > 1) return; // Prevent multiple characters

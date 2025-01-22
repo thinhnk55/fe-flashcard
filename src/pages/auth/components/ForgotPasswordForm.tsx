@@ -22,6 +22,12 @@ export const ForgotPasswordForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (resetPasswordData.checked) {
+      setResetPasswordData({ ...resetPasswordData, checked: false });
+    }
+  }, [resetPasswordData, setResetPasswordData]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateEmail(resetPasswordData.username)) {
@@ -73,7 +79,7 @@ export const ForgotPasswordForm: React.FC = () => {
         onChange={(value) =>
           setResetPasswordData((prev) => ({ ...prev, username: value }))
         }
-        required
+        required={true}
       />
       <ResetPasswordError message={error} />
       <ResetPasswordButton isLoading={isLoading} />
