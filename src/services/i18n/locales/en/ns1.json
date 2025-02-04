@@ -45,7 +45,8 @@
       "password_invalid": "The password must be between 6 and 50 characters in length.",
       "email_not_found": "The email address does not exist.",
       "account_locked": "Your account is locked.",
-      "password_incorrect": "The password is incorrect."
+      "password_incorrect": "The password is incorrect.",
+      "google_failed": "Google sign-in failed. Please try again or use another method."
     }
   },
   "register": {

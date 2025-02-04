@@ -3,6 +3,7 @@ import { atom, useRecoilState } from "recoil";
 import { LoginResponseData } from "../api/login";
 import { RegisterResponseData } from "../api/register";
 import { ResetPasswordResponseData } from "../api/resetpassword";
+import { GoogleLoginResponseData } from "../api/google";
 
 // Define the Auth interface for user authentication details
 export interface Auth {
@@ -17,6 +18,23 @@ export interface Auth {
 }
 
 export const convertLoginDataToAuth = (auth: Auth, data: LoginResponseData) => {
+  return {
+    ...auth,
+    username: data.username,
+    password: "",
+    role: data.role,
+    status: data.status,
+    token: data.token,
+    token_expired: data.token_expired,
+    created_time: data.created_time,
+    access_token: data.access_token,
+  };
+};
+
+export const convertGoogleLoginDataToAuth = (
+  auth: Auth,
+  data: GoogleLoginResponseData
+) => {
   return {
     ...auth,
     username: data.username,
