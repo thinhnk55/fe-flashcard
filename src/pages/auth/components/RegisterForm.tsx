@@ -11,10 +11,17 @@ import {
   RegisterResponse,
 } from "../../../logic/auth/api/register";
 import {
+  convertGoogleLoginDataToAuth,
   convertRegisterDataToAuth,
   useAuthState,
 } from "../../../logic/auth/recoil/auth";
 import { EmailInput } from "./EmailInput";
+import {
+  GoogleLoginResponse,
+  GooleLoginRequest,
+  handleGooleLogin,
+} from "../../../logic/auth/api/google";
+import { GoogleSignin } from "./GoogleOauth";
 
 export const RegisterForm: React.FC = () => {
   const { t } = useTranslation();
@@ -68,6 +75,41 @@ export const RegisterForm: React.FC = () => {
       setIsLoading(false);
     }
   };
+  const onGooleLogin = async (token: string) => {
+    setIsLoading(true);
+    try {
+      const googleLoginRequest: GooleLoginRequest = {
+        token: token,
+      };
+      const response: GoogleLoginResponse = await handleGooleLogin(
+        googleLoginRequest
+      );
+      if (response.e == 0) {
+        console.log("Login Response:", response);
+        if (response.d) {
+          const newAuth = convertGoogleLoginDataToAuth(auth, response.d);
+          setAuth(newAuth);
+        }
+        setError(null);
+        navigate("/");
+      } else if (response.e == 11) {
+        setError("login.error.account_locked");
+      } else {
+        setError("common.error.system_error");
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? "common.error.system_error"
+          : "common.error.system_error"
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  function onGooleLoginError(): void {
+    setError("login.error.google_failed");
+  }
 
   return (
     <form
@@ -102,6 +144,7 @@ export const RegisterForm: React.FC = () => {
       <RegisterError message={error} />
       <RegisterButton isLoading={isLoading} />
       <RegisterRedirect />
+      <GoogleSignin onSuccess={onGooleLogin} onError={onGooleLoginError} />
     </form>
   );
 };

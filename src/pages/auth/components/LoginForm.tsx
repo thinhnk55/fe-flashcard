@@ -12,9 +12,16 @@ import {
   LoginResponse,
 } from "../../../logic/auth/api/login";
 import {
+  convertGoogleLoginDataToAuth,
   convertLoginDataToAuth,
   useAuthState,
 } from "../../../logic/auth/recoil/auth";
+import { GoogleSignin } from "./GoogleOauth";
+import {
+  GoogleLoginResponse,
+  GooleLoginRequest,
+  handleGooleLogin,
+} from "../../../logic/auth/api/google";
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
@@ -68,6 +75,42 @@ export const LoginForm: React.FC = () => {
     }
   };
 
+  const onGooleLogin = async (token: string) => {
+    setIsLoading(true);
+    try {
+      const googleLoginRequest: GooleLoginRequest = {
+        token: token,
+      };
+      const response: GoogleLoginResponse = await handleGooleLogin(
+        googleLoginRequest
+      );
+      if (response.e == 0) {
+        console.log("Login Response:", response);
+        if (response.d) {
+          const newAuth = convertGoogleLoginDataToAuth(auth, response.d);
+          setAuth(newAuth);
+        }
+        setError(null);
+        navigate("/");
+      } else if (response.e == 11) {
+        setError("login.error.account_locked");
+      } else {
+        setError("common.error.system_error");
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? "common.error.system_error"
+          : "common.error.system_error"
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  function onGooleLoginError(): void {
+    setError("login.error.google_failed");
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -98,6 +141,7 @@ export const LoginForm: React.FC = () => {
       <LoginError message={error} />
       <LoginButton isLoading={isLoading} />
       <LoginRedirect />
+      <GoogleSignin onSuccess={onGooleLogin} onError={onGooleLoginError} />
     </form>
   );
 };
